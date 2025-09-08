@@ -9,9 +9,11 @@ package ca.bcit.comp2522.bank;
  */
 public class BankClient
 {
-    private final String name;
+    private final Name name;
     private final Date birthDate;
     private final Date deathDate;
+    private final String clientID;
+    private final Date signupDate;
 
     /**
      * constructor to initialize the gloabal arguments: name, birthDate, and
@@ -19,19 +21,26 @@ public class BankClient
      *
      * @params, name, birthDate, deathDate
      */
-    public BankClient(final String name, final Date birthDate, final Date deathDate)
+    public BankClient(final Name name, final Date birthDate,
+                      final Date deathDate, final String clientID,
+                      final Date signupDaet)
     {
-        if (name == null || birthDate == null)
+        if (name == null || birthDate == null || clientID == null
+                || signupDaet == null)
         {
-            throw new IllegalArgumentException("Name and birthDate cannot be null.");
+            throw new IllegalArgumentException("Name, birthDate, clientID " +
+                    "or signupDate cannot be null.");
         }
-        if (name.length() < 1)
+
+        if (clientID.length() > 7 || clientID.length() < 6)
         {
-            throw new IllegalArgumentException("Name cannot be empty");
+            throw new IllegalArgumentException("clientID must be between 6 and 7.");
         }
         this.name = name;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
+        this.clientID = clientID;
+        this.signupDate = signupDaet;
     }
 
     /**
@@ -44,7 +53,30 @@ public class BankClient
     public String getDetails()
     {
         String details = "";
+        boolean isAlive;
+        if (deathDate != null)
+        {
+            isAlive = true;
+        }
+        else
+        {
+            isAlive = false;
+        }
 
+        if (isAlive)
+        {
+            details += name.getFullName() + " #" + clientID + "(alive) "
+                    + "joined bank on " + signupDate.getDayOfTheWeek()
+                    + ", " + signupDate.getMonth() + " " + signupDate.getDay()
+                    + ", " + signupDate.getYear();
+        }
+        else
+        {
+            details += name.getFullName() + " #" + clientID + "(not alive) "
+                    + "joined bank on " + signupDate.getDayOfTheWeek()
+                    + ", " + signupDate.getMonth() + " " + signupDate.getDay()
+                    + ", " + signupDate.getYear();
+        }
         return details;
     }
 
