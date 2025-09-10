@@ -102,7 +102,7 @@ public class Date {
      *
      * @return day of week as lowercase String
      */
-    public String getDayOfWeek() {
+    public String getDayOfTheWeek() {
         final int[] MONTH_CODES = {0, 1, 4, 4, 0, 2, 5, 0, 3, 6, 1, 4, 6};
         final String[] DAYS = {"saturday", "sunday", "monday", "tuesday", "wednesday", "thursday", "friday"};
 
@@ -130,6 +130,15 @@ public class Date {
 
         int dayIndex = total % 7;
         return DAYS[dayIndex];
+    }
+
+    public String getMonthName() {
+        String[] MONTH_NAMES = {
+                "", // index 0 unused to align with month numbers
+                "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+        };
+        return MONTH_NAMES[month];
     }
 
     /**
