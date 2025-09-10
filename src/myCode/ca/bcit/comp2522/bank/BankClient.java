@@ -40,34 +40,26 @@ public class BankClient
      *
      * @return details
      */
-    public String getDetails()
-    {
-        String details = "";
-        boolean isAlive;
-        if (deathDate == null)
-        {
-            isAlive = true;
-        }
-        else
-        {
-            isAlive = false;
+    public String getDetails() {
+        boolean isAlive = (deathDate == null);
+
+        StringBuilder details = new StringBuilder();
+
+        details.append(name.getFullName())
+                .append(" #").append(clientID)
+                .append(isAlive ? " (alive)" : " (not alive)")
+                .append(" was born on ").append(birthDate.getDayOfTheWeek()).append(" ")
+                .append(birthDate.getMonthName()).append(" ").append(birthDate.getDay()).append(", ").append(birthDate.getYear());
+
+        if (!isAlive) {
+            details.append(" and died on ").append(deathDate.getDayOfTheWeek()).append(" ")
+                    .append(deathDate.getMonthName()).append(" ").append(deathDate.getDay()).append(", ").append(deathDate.getYear());
         }
 
-        if (isAlive)
-        {
-            details += name.getFullName() + " #" + clientID + "(alive) "
-                    + "joined bank on " + signupDate.getDayOfTheWeek()
-                    + ", " + signupDate.getMonth() + " " + signupDate.getDay()
-                    + ", " + signupDate.getYear();
-        }
-        else
-        {
-            details += name.getFullName() + " #" + clientID + "(not alive) "
-                    + "joined bank on " + signupDate.getDayOfTheWeek()
-                    + ", " + signupDate.getMonth() + " " + signupDate.getDay()
-                    + ", " + signupDate.getYear();
-        }
-        return details;
+        details.append(". Joined bank on ").append(signupDate.getDayOfTheWeek()).append(" ")
+                .append(signupDate.getMonthName()).append(" ").append(signupDate.getDay()).append(", ").append(signupDate.getYear());
+
+        return details.toString();
     }
 
 }
