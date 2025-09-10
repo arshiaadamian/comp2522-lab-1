@@ -27,81 +27,83 @@ public class Date {
     private static final int WEDNESDAY = 4;
     private static final int THURSDAY = 5;
     private static final int FRIDAY = 6;
-}
 
-/**
- * Constructs a Date object with validation.
- * @param year
- * @param month
- * @param day
- * @throws IllegalArgumentException if the date is invalid
- */
-public Date(final int year, final int month, final int day) {
-    if (year < MIN_YEAR || year > MAX_YEAR) {
-        throw new IllegalArgumentException("Invalid year. Pick a year between 1800 and 2025");
+
+    /**
+     * Constructs a Date object with validation.
+     *
+     * @param year
+     * @param month
+     * @param day
+     * @throws IllegalArgumentException if the date is invalid
+     */
+    public Date(final int year, final int month, final int day) {
+        if (year < MIN_YEAR || year > MAX_YEAR) {
+            throw new IllegalArgumentException("Invalid year. Pick a year between 1800 and 2025");
+        }
+
+        if (month < 1 || month > 12) {
+            throw new IllegalArgumentException("Invalid month. Pick a month between 1 and 12");
+        }
+
+        int maxDays = DAYS_IN_MONTH[month];
+        if (month == 2 && isLeapYear(year)) {
+            maxDays = 29;
+        }
+
+        if (day < 1 || day > maxDays) {
+            throw new IllegalArgumentException("Invalid day. Pick a day between 1 and 31");
+        }
+
+        // Save values after validation
+        this.year = year;
+        this.month = month;
+        this.day = day;
     }
 
-    if (month < 1 || month > 12) {
-        throw new IllegalArgumentException("Invalid month. Pick a month between 1 and 12");
+    /**
+     * Returns the year of this date.
+     *
+     * @return the year as an int
+     */
+    public int getYear() {
+        return year;
     }
 
-    int maxDays = DAYS_IN_MONTH[month];
-    if (month == 2 && isLeapYear(year)) {
-        maxDays = 29;
+    /**
+     * Returns the month of this date.
+     *
+     * @return the month as an int
+     */
+    public int getMonth() {
+        return month;
     }
 
-    if (day < 1 || day > maxDays) {
-        throw new IllegalArgumentException("Invalid day. Pick a day between 1 and 31");
+    /**
+     * Returns the day of the month for this date.
+     *
+     * @return the day as an int
+     */
+    public int getDay() {
+        return day;
     }
 
-    // Save values after validation
-    this.year = year;
-    this.month = month;
-    this.day = day;
-}
+    /**
+     * Returns the date in YYYY-MM-DD format.
+     *
+     * @return the date as a String
+     */
+    public String getYYYYMMDD() {
+        return String.format("%04d-%02d-%02d", year, month, day);
+    }
 
-/**
- * Returns the year of this date.
- *
- * @return the year as an int
- */
-public int getYear() {
-    return year;
-}
-
-/**
- * Returns the month of this date.
- *
- * @return the month as an int
- */
-public int getMonth() {
-    return month;
-}
-
-/**
- * Returns the day of the month for this date.
- *
- * @return the day as an int
- */
-public int getDay() {
-    return day;
-}
-
-/**
- * Returns the date in YYYY-MM-DD format.
- *
- * @return the date as a String
- */
-public String getYYYYMMDD() {
-    return String.format("%04d-%02d-%02d", year, month, day);
-}
-
-/**
- * Returns if given year is leap year.
- *
- * @param y the year
- * @return true if leap year, false otherwise
- */
-public boolean isLeapYear(final int y) {
-    return (y % 4 == 0 && y % 100 != 0) || (y % 400 == 0);
+    /**
+     * Returns if given year is leap year.
+     *
+     * @param y the year
+     * @return true if leap year, false otherwise
+     */
+    public boolean isLeapYear(final int y) {
+        return (y % 4 == 0 && y % 100 != 0) || (y % 400 == 0);
+    }
 }

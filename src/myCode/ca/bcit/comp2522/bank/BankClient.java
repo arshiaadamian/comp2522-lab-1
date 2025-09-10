@@ -4,12 +4,12 @@ package ca.bcit.comp2522.bank;
  * BankClient class
  * explanation goes here
  *
- * @author: Arshia, Indy
+ * @author: Arshia
  * @version: 1.0
  */
 public class BankClient
 {
-    private final Name name;
+    final Name name;
     private final Date birthDate;
     private final Date deathDate;
     private final String clientID;
@@ -23,24 +23,14 @@ public class BankClient
      */
     public BankClient(final Name name, final Date birthDate,
                       final Date deathDate, final String clientID,
-                      final Date signupDaet)
+                      final Date signupDate)
     {
-        if (name == null || birthDate == null || clientID == null
-                || signupDaet == null)
-        {
-            throw new IllegalArgumentException("Name, birthDate, clientID " +
-                    "or signupDate cannot be null.");
-        }
-
-        if (clientID.length() > 7 || clientID.length() < 6)
-        {
-            throw new IllegalArgumentException("clientID must be between 6 and 7.");
-        }
+        Validation.validateBankClient(name, birthDate, deathDate, clientID, signupDate);
         this.name = name;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
         this.clientID = clientID;
-        this.signupDate = signupDaet;
+        this.signupDate = signupDate;
     }
 
     /**
@@ -54,7 +44,7 @@ public class BankClient
     {
         String details = "";
         boolean isAlive;
-        if (deathDate != null)
+        if (deathDate == null)
         {
             isAlive = true;
         }
