@@ -49,15 +49,19 @@ public class BankAccount
         }
     }
 
-    public String getDetails()
-    {
+    public String getDetails() {
         String details = client.name.getFullName() + " had $" + balanceUsd
                 + " USD in account #" + accountNumber + " which he opened on "
-                + accountOpened.getDayOfTheWeek() + " " + accountOpened.getMonth()
-                + " " + accountOpened.getDay() + ", " + accountOpened.getYear()
-                + "and closed " + accountClosed.getDayOfTheWeek() + " "
-                + accountClosed.getMonth() + " " + accountClosed.getDay()
-                + ", " + accountClosed.getYear() ;
+                + accountOpened.getDayOfTheWeek() + " " + accountOpened.getMonthName()
+                + " " + accountOpened.getDay() + ", " + accountOpened.getYear();
+
+        if (accountClosed != null) {
+            details += " and closed " + accountClosed.getDayOfTheWeek() + " "
+                    + accountClosed.getMonthName() + " " + accountClosed.getDay()
+                    + ", " + accountClosed.getYear();
+        } else {
+            details += " and the account is still open.";
+        }
 
         return details;
     }
