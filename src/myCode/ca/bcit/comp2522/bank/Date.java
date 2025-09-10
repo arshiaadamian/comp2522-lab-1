@@ -16,7 +16,7 @@ public class Date {
     private static final int MIN_YEAR = 1800;
     private static final int MAX_YEAR = 2025;
     private static final int[] DAYS_IN_MONTH = {
-            0, 31, 28, 31, 30, 31, 31, 30, 31, 30, 31, 30, 31
+            0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
     };
 
     // Day of week constants
@@ -95,6 +95,41 @@ public class Date {
      */
     public String getYYYYMMDD() {
         return String.format("%04d-%02d-%02d", year, month, day);
+    }
+
+    /**
+     * Returns the day of the week (e.g., "monday", "tuesday") based on this date.
+     *
+     * @return day of week as lowercase String
+     */
+    public String getDayOfWeek() {
+        final int[] MONTH_CODES = {0, 1, 4, 4, 0, 2, 5, 0, 3, 6, 1, 4, 6};
+        final String[] DAYS = {"saturday", "sunday", "monday", "tuesday", "wednesday", "thursday", "friday"};
+
+        int centuryOffset = 0;
+
+        if (year >= 2000) {
+            centuryOffset = 6;
+        } else if (year < 1900) {
+            centuryOffset = 2;
+        }
+
+        boolean leap = isLeapYear(year);
+        boolean adjustForLeap = leap && (month == 1 || month == 2);
+
+        int y = year % 100;
+        int numTwelves = y / 12;
+        int remainder = y % 12;
+        int numFours = remainder / 4;
+
+        int total = numTwelves + remainder + numFours + day + MONTH_CODES[month] + centuryOffset;
+
+        if (adjustForLeap) {
+            total -= 1;
+        }
+
+        int dayIndex = total % 7;
+        return DAYS[dayIndex];
     }
 
     /**
