@@ -4,12 +4,12 @@ package ca.bcit.comp2522.bank;
  * BankClient class
  * explanation goes here
  *
- * @author: Arshia, Indy
+ * @author: Arshia
  * @version: 1.0
  */
 public class BankClient
 {
-    private final Name name;
+    final Name name;
     private final Date birthDate;
     private final Date deathDate;
     private final String clientID;

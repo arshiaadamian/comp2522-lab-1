@@ -3,7 +3,7 @@ package ca.bcit.comp2522.bank;
 /**
  * class to record the name and the lastname of a bank user
  *
- * @author: Arshia, Indy
+ * @author: Arshia
  * @version: 1.0
  */
 public class Name {
@@ -22,22 +22,7 @@ public class Name {
      */
     public Name(final String first, final String last)
     {
-        if (first == null || last == null)
-        {
-            throw new IllegalArgumentException("first or last null");
-        }
-        if (first.length() < 1 || last.length() < 1)
-        {
-            throw new IllegalArgumentException("first or last empty");
-        }
-        if (first.length() > 45 || last.length() > 45)
-        {
-            throw new IllegalArgumentException("first or last length exceed 45");
-        }
-        if (first.contains("admin") || last.contains("admin"))
-        {
-            throw new IllegalArgumentException("first or last can not contain admin");
-        }
+        Validation.validateName(first, last);
 
         this.first = first;
         this.last = last;
