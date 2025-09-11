@@ -116,7 +116,10 @@ public class Name {
         return reverseName;
     }
 
-
+    /**
+     * main function for testing purposes, printing the fullname normally and also in reverse.
+     *
+     */
     public static void main(final String[] args)
     {
         Name name1 = new Name("arshia", "adamian");

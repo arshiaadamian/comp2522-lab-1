@@ -13,9 +13,9 @@ public class Date {
     private final int day;
 
     // Constants
-    private static final int MIN_YEAR = 1800;
-    private static final int MAX_YEAR = 2025;
-    private static final int[] DAYS_IN_MONTH = {
+    public static final int MIN_YEAR = 1800;
+    public static final int MAX_YEAR = 2025;
+    public static final int[] DAYS_IN_MONTH = {
             0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
     };
 
@@ -38,22 +38,8 @@ public class Date {
      * @throws IllegalArgumentException if the date is invalid
      */
     public Date(final int year, final int month, final int day) {
-        if (year < MIN_YEAR || year > MAX_YEAR) {
-            throw new IllegalArgumentException("Invalid year. Pick a year between 1800 and 2025");
-        }
-
-        if (month < 1 || month > 12) {
-            throw new IllegalArgumentException("Invalid month. Pick a month between 1 and 12");
-        }
-
-        int maxDays = DAYS_IN_MONTH[month];
-        if (month == 2 && isLeapYear(year)) {
-            maxDays = 29;
-        }
-
-        if (day < 1 || day > maxDays) {
-            throw new IllegalArgumentException("Invalid day. Pick a day between 1 and 31");
-        }
+        //validation
+        Validation.validateDate(year, month, day);
 
         // Save values after validation
         this.year = year;
@@ -132,6 +118,10 @@ public class Date {
         return DAYS[dayIndex];
     }
 
+    /**
+     * method to return the month as a string.
+     * @return
+     */
     public String getMonthName() {
         String[] MONTH_NAMES = {
                 "", // index 0 unused to align with month numbers
@@ -147,7 +137,7 @@ public class Date {
      * @param y the year
      * @return true if leap year, false otherwise
      */
-    public boolean isLeapYear(final int y) {
+    public static boolean isLeapYear(final int y) {
         return (y % 4 == 0 && y % 100 != 0) || (y % 400 == 0);
     }
 }
