@@ -24,6 +24,9 @@ public class Validation {
     private static final int MIN_MONTH = 1;
     private static final int MAX_MONTH = 12;
     private static final int MIN_DAY = 1;
+    private static final int FEBRUARY = 2;
+    private static final int MAX_DAYS = 29;
+
 
     /**
      * Validates parameters for a BankClient constructor.
@@ -98,8 +101,8 @@ public class Validation {
         }
 
         int maxDays = Date.DAYS_IN_MONTH[month];
-        if (month == 2 && Date.isLeapYear(year)) {
-            maxDays = 29;
+        if (month == FEBRUARY && Date.isLeapYear(year)) {
+            maxDays = MAX_DAYS;
         }
 
         if (day < MIN_DAY || day > maxDays) {
