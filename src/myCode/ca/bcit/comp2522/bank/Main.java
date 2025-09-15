@@ -1,12 +1,25 @@
 package ca.bcit.comp2522.bank;
 
 /**
- * Entry point to run the banking system simulation.
- * Demonstrates creation and interaction with BankClient and BankAccount.
+ * Entry point for running the banking system simulation.
+ * Demonstrates the creation of BankClient and link BankAccount objects,
+ * as well as interactions such as deposits, withdrawals, and retrieving account details.
+ *
+ * This class simulates a few well-known historical figures as bank clients.
+ * It showcases object instantiation, method calls, and output of details.
+ *
+ * @author Arshia
+ * @version 1.0
  */
 public class Main {
+    /**
+     * Runs the banking simulation by creating clients, accounts,
+     * performing withdrawals, and printing details.
+     *
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
-        // Albert Einstein
+        // --- Albert Einstein ---
         Name einsteinName = new Name("Albert", "Einstein");
         Date einsteinBirth = new Date(1879, 3, 14);
         Date einsteinDeath = new Date(1955, 4, 18);
@@ -24,7 +37,7 @@ public class Main {
 
         System.out.println();
 
-        // Nelson Mandela
+        // --- Nelson Mandela ---
         Name mandelaName = new Name("Nelson", "Mandela");
         Date mandelaBirth = new Date(1918, 7, 18);
         Date mandelaDeath = new Date(2013, 12, 5);
@@ -41,7 +54,7 @@ public class Main {
 
         System.out.println();
 
-        // Frida Kahlo
+        // --- Frida Kahlo ---
         Name kahloName = new Name("Frida", "Kahlo");
         Date kahloBirth = new Date(1907, 7, 6);
         Date kahloDeath = new Date(1954, 7, 13);
@@ -59,7 +72,7 @@ public class Main {
 
         System.out.println();
 
-        // Jackie Chan
+        // --- Jackie Chan ---
         Name chanName = new Name("Jackie", "Chan");
         Date chanBirth = new Date(1954, 4, 7);
         Date chanSignup = new Date(1980, 10, 1);
