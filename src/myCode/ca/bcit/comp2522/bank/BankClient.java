@@ -1,8 +1,8 @@
 package ca.bcit.comp2522.bank;
 
 /**
- * BankClient class
- * explanation goes here
+ * The BankClient class represents a person who has a bank account.
+ * It stores information about their name, birth/death dates, client ID, and signup date.
  *
  * @author: Arshia
  * @version: 1.0
@@ -16,10 +16,10 @@ public class BankClient
     private final Date signupDate;
 
     /**
-     * constructor to initialize the gloabal arguments: name, birthDate, and
-     * deathDate
+     * Constructor to initialize the global arguments: name, birthDate, and
+     * deathDate.
      *
-     * @params, name, birthDate, deathDate
+     * @params name, birthDate, deathDate
      */
     public BankClient(final Name name, final Date birthDate,
                       final Date deathDate, final String clientID,

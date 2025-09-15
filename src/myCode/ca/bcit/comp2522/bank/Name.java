@@ -1,10 +1,11 @@
 package ca.bcit.comp2522.bank;
 
 /**
- * class to record the name and the lastname of a bank user
+ * Represents the first and last name of a bank user.
+ * Provides various methods to access and format the name.
  *
- * @author: Arshia
- * @version: 1.0
+ * @author Arshia
+ * @version 1.0
  */
 public class Name {
 
@@ -12,16 +13,15 @@ public class Name {
     private final String last;
 
     /**
-    * public constructor that takes final strings first and last, and checks
-     * if they are null or if their length exceeds 45. In those cases it will
-     * throw an IllegalArgumentException error.
+     * Constructs a Name object with the given first and last names.
+     * Validates both names using the Validation class.
      *
-     * @param first, last
-     *
-     * @throws IllegalArgumentException
+     * @param first the user's first name
+     * @param last the user's last name
+     * @throws IllegalArgumentException if either name is null,
+     *         empty, too long, or contains disallowed words
      */
-    public Name(final String first, final String last)
-    {
+    public Name(final String first, final String last) {
         Validation.validateName(first, last);
 
         this.first = first;
@@ -29,103 +29,78 @@ public class Name {
     }
 
     /**
-     * first getter method that returns string first.
+     * Returns the first name.
      *
-     * @return first
+     * @return the first name
      */
-    public String getFirst()
-    {
+    public String getFirst() {
         return first;
     }
 
     /**
-     * last getter method that returns string last.
+     * Returns the last name.
      *
-     * @return last
+     * @return the last name
      */
-    public String getLast()
-    {
+    public String getLast() {
         return last;
     }
 
-
     /**
-     * initials getter method that returns the initials of a person's name as
-     * a string.
+     * Returns the initials of the user in the format "F.L".
      *
-     * @return initials
+     * @return the user's initials
      */
-    public String getInitials()
-    {
-        final String initials;
-        initials = first.substring(0, 1).toUpperCase() + "."
+    public String getInitials() {
+        return first.substring(0, 1).toUpperCase() + "."
                 + last.substring(0, 1).toUpperCase();
-
-        return initials;
     }
 
-
     /**
-     * A method that returns the full name of a person in proper format as
-     * a string, meaning the first letters of the first and lastname will
-     * be in capital case regardless of what the user have entered before.
+     * Returns the full name in proper format (capitalized).
+     * For example, "arshia adamian" → "Arshia Adamian".
      *
-     * @return fullName
+     * @return the properly formatted full name
      */
-    public String getFullName()
-    {
-        final String fullName;
-        final String firstInProperForm;
-        final String lastInProperForm;
-
-        firstInProperForm = first.substring(0, 1).toUpperCase()
+    public String getFullName() {
+        final String firstInProperForm = first.substring(0, 1).toUpperCase()
                 + first.substring(1).toLowerCase();
-        lastInProperForm = last.substring(0, 1).toUpperCase()
+        final String lastInProperForm = last.substring(0, 1).toUpperCase()
                 + last.substring(1).toLowerCase();
 
-        fullName = firstInProperForm + " " + lastInProperForm;
-
-        return fullName;
-    }
-
-
-    /**
-     * A method that returns the first and lastname respectively in reversed
-     * order.
-     *
-     * @return reverseName
-     */
-    public String getReverseName()
-    {
-        final String reverseName;
-        String firstReversed = "";
-        String lastReversed = "";
-
-        for (int i = 0; i < first.length(); i++)
-        {
-            firstReversed += first.charAt(first.length() - 1 - i);
-        }
-
-        for (int i = 0; i < last.length(); i++)
-        {
-            lastReversed += last.charAt(last.length() - 1 - i);
-        }
-
-        reverseName = lastReversed + " " + firstReversed;
-
-        return reverseName;
+        return firstInProperForm + " " + lastInProperForm;
     }
 
     /**
-     * main function for testing purposes, printing the fullname normally and also in reverse.
+     * Returns the full name with first and last names reversed.
+     * Characters are reversed individually (e.g., "John" → "nhoJ").
      *
+     * @return the reversed full name
      */
-    public static void main(final String[] args)
-    {
+    public String getReverseName() {
+        StringBuilder firstReversed = new StringBuilder();
+        StringBuilder lastReversed = new StringBuilder();
+
+        for (int i = 0; i < first.length(); i++) {
+            firstReversed.append(first.charAt(first.length() - 1 - i));
+        }
+
+        for (int i = 0; i < last.length(); i++) {
+            lastReversed.append(last.charAt(last.length() - 1 - i));
+        }
+
+        return lastReversed + " " + firstReversed;
+    }
+
+    /**
+     * Main method for testing purposes.
+     *
+     * @param args command-line arguments (not used)
+     */
+    public static void main(final String[] args) {
         Name name1 = new Name("arshia", "adamian");
 
         System.out.println(name1.getFullName());
         System.out.println(name1.getReverseName());
     }
-
 }

@@ -119,7 +119,8 @@ public class Date {
     }
 
     /**
-     * method to return the month as a string.
+     * Method to return the month as a string.
+     *
      * @return
      */
     public String getMonthName() {

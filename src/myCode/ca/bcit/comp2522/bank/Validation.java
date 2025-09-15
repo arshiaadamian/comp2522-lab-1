@@ -1,95 +1,100 @@
 package ca.bcit.comp2522.bank;
 
 /**
- * Validation class: Every validation in every constructor is written here
- * using public static void methods, then they will be called inside
- * the corresponding constructors of different classes.
+ * Validation class: Centralized validations for all constructors in the project.
+ * All public static methods in this class are called inside other constructors.
  *
- * @author Arshia, Indy
+ * @author Arshia
  * @version 1.0
  */
-public class Validation
-{
+public class Validation {
+
+    // Constants for name validation
+    private static final int MIN_NAME_LENGTH = 1;
+    private static final int MAX_NAME_LENGTH = 45;
+    private static final String FORBIDDEN_SUBSTRING = "admin";
+
+    // Constants for client ID and account number validation
+    private static final int MIN_ID_LENGTH = 6;
+    private static final int MAX_ID_LENGTH = 7;
+
+    // Constants for date validation
+    private static final int MIN_VALID_YEAR = 1800;
+    private static final int MAX_VALID_YEAR = 2025;
+    private static final int MIN_MONTH = 1;
+    private static final int MAX_MONTH = 12;
+    private static final int MIN_DAY = 1;
+
+    /**
+     * Validates parameters for a BankClient constructor.
+     *
+     * @param name       the client's name
+     * @param birthDate  birth date
+     * @param deathDate  death date (optional)
+     * @param clientID   unique identifier
+     * @param signupDate date the client joined
+     */
     public static void validateBankClient(final Name name, final Date birthDate,
-                                   final Date deathDate, final String clientID,
-                                   final Date signupDaet)
-    {
-        if (name == null || birthDate == null || clientID == null
-                || signupDaet == null)
-        {
-            throw new IllegalArgumentException("Name, birthDate, clientID " +
-                    "or signupDate cannot be null.");
+                                          final Date deathDate, final String clientID,
+                                          final Date signupDate) {
+        if (name == null || birthDate == null || clientID == null || signupDate == null) {
+            throw new IllegalArgumentException("Name, birthDate, clientID or signupDate cannot be null.");
         }
 
-        if (clientID.length() > 7 || clientID.length() < 6)
-        {
-            throw new IllegalArgumentException("clientID must be between 6 and 7.");
+        if (clientID.length() < MIN_ID_LENGTH || clientID.length() > MAX_ID_LENGTH) {
+            throw new IllegalArgumentException("clientID must be between " + MIN_ID_LENGTH + " and " + MAX_ID_LENGTH + " characters.");
         }
     }
 
-
     /**
-     * method to validate the name in the Name class, it checks whether a name is null, blank, and also
-     * checks the length of the name and whether the name contains the word "admin", if so it will
-     * throw an error.
+     * Validates first and last names.
      *
-     * @param first
-     * @param last
+     * @param first the first name
+     * @param last  the last name
      */
-    public static void validateName(final String first, final String last)
-    {
-        if (first == null || last == null)
-        {
-            throw new IllegalArgumentException("first or last null");
+    public static void validateName(final String first, final String last) {
+        if (first == null || last == null) {
+            throw new IllegalArgumentException("First or last name cannot be null.");
         }
-        if (first.length() < 1 || last.length() < 1)
-        {
-            throw new IllegalArgumentException("first or last empty");
+
+        if (first.length() < MIN_NAME_LENGTH || last.length() < MIN_NAME_LENGTH) {
+            throw new IllegalArgumentException("First or last name cannot be empty.");
         }
-        if (first.length() > 45 || last.length() > 45)
-        {
-            throw new IllegalArgumentException("first or last length exceed 45");
+
+        if (first.length() > MAX_NAME_LENGTH || last.length() > MAX_NAME_LENGTH) {
+            throw new IllegalArgumentException("First or last name cannot exceed " + MAX_NAME_LENGTH + " characters.");
         }
-        if (first.contains("admin") || last.contains("admin"))
-        {
-            throw new IllegalArgumentException("first or last can not contain admin");
+
+        if (first.contains(FORBIDDEN_SUBSTRING) || last.contains(FORBIDDEN_SUBSTRING)) {
+            throw new IllegalArgumentException("Names cannot contain the word '" + FORBIDDEN_SUBSTRING + "'.");
         }
     }
 
-
     /**
-     * method to validate the bank account and is to be used inside the BankAccount class's
-     * constructor. It checks if the account number is greater or less than 6, if so
-     * it will return an error.
+     * Validates a bank account number.
      *
-     * @param accountNumber
+     * @param accountNumber the account number
      */
-    public static void validateBankAccount(final String accountNumber)
-    {
-        if (accountNumber == null || accountNumber.length() > 7 || accountNumber.length() < 6)
-        {
-            throw new IllegalArgumentException("accountNumber must be between 6 and 7.");
+    public static void validateBankAccount(final String accountNumber) {
+        if (accountNumber == null || accountNumber.length() < MIN_ID_LENGTH || accountNumber.length() > MAX_ID_LENGTH) {
+            throw new IllegalArgumentException("Account number must be between " + MIN_ID_LENGTH + " and " + MAX_ID_LENGTH + " characters.");
         }
     }
 
-
     /**
-     * method to validate a Date object, it is to be used inside the Date class's constructor.
-     * It checks whether the year is between 1800 and 2025, and also whether
-     * the month is a valid number. It also checks if the day is less than or greater than
-     * the maxDays, and if any of those situations occur, it will throw an error.
-     * @param year
-     * @param month
-     * @param day
+     * Validates a date by year, month, and day.
+     *
+     * @param year  the year
+     * @param month the month (1–12)
+     * @param day   the day of the month
      */
-    public static void validateDate(final int year, final int month, final int day)
-    {
-        if (year < Date.MIN_YEAR || year > Date.MAX_YEAR) {
-            throw new IllegalArgumentException("Invalid year. Pick a year between 1800 and 2025");
+    public static void validateDate(final int year, final int month, final int day) {
+        if (year < MIN_VALID_YEAR || year > MAX_VALID_YEAR) {
+            throw new IllegalArgumentException("Invalid year. Pick a year between " + MIN_VALID_YEAR + " and " + MAX_VALID_YEAR + ".");
         }
 
-        if (month < 1 || month > 12) {
-            throw new IllegalArgumentException("Invalid month. Pick a month between 1 and 12");
+        if (month < MIN_MONTH || month > MAX_MONTH) {
+            throw new IllegalArgumentException("Invalid month. Pick a month between " + MIN_MONTH + " and " + MAX_MONTH + ".");
         }
 
         int maxDays = Date.DAYS_IN_MONTH[month];
@@ -97,8 +102,8 @@ public class Validation
             maxDays = 29;
         }
 
-        if (day < 1 || day > maxDays) {
-            throw new IllegalArgumentException("Invalid day. Pick a day between 1 and 31");
+        if (day < MIN_DAY || day > maxDays) {
+            throw new IllegalArgumentException("Invalid day. Pick a day between " + MIN_DAY + " and " + maxDays + ".");
         }
     }
 }
