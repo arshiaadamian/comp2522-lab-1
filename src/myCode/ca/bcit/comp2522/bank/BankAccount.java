@@ -26,9 +26,12 @@ public class BankAccount
      * @param accountOpened  the date the account was opened
      * @param accountClosed  the date the account was closed (may be null)
      */
-    public BankAccount(final BankClient client, final double balanceUsd,
-                       final int pin, final String accountNumber,
-                       final Date accountOpened, final Date accountClosed)
+    public BankAccount(final BankClient client,
+                       final double balanceUsd,
+                       final int pin,
+                       final String accountNumber,
+                       final Date accountOpened,
+                       final Date accountClosed)
     {
         // Validation logic to be implemented in the Validation class.
         Validation.validateBankAccount(accountNumber);

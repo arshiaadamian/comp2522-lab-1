@@ -9,6 +9,9 @@ package ca.bcit.comp2522.bank;
  */
 public class Name {
 
+    private static final int FIRST_CHARACTER_INDEX = 0;
+    private static final int SECOND_CHARACTER_INDEX = 1;
+
     private final String first;
     private final String last;
 
@@ -21,7 +24,9 @@ public class Name {
      * @throws IllegalArgumentException if either name is null,
      *         empty, too long, or contains disallowed words
      */
-    public Name(final String first, final String last) {
+    public Name(final String first,
+                final String last)
+    {
         Validation.validateName(first, last);
 
         this.first = first;
@@ -52,8 +57,8 @@ public class Name {
      * @return the user's initials
      */
     public String getInitials() {
-        return first.substring(0, 1).toUpperCase() + "."
-                + last.substring(0, 1).toUpperCase();
+        return first.substring(FIRST_CHARACTER_INDEX, SECOND_CHARACTER_INDEX).toUpperCase() + "."
+                + last.substring(FIRST_CHARACTER_INDEX, SECOND_CHARACTER_INDEX).toUpperCase();
     }
 
     /**
@@ -63,10 +68,10 @@ public class Name {
      * @return the properly formatted full name
      */
     public String getFullName() {
-        final String firstInProperForm = first.substring(0, 1).toUpperCase()
-                + first.substring(1).toLowerCase();
-        final String lastInProperForm = last.substring(0, 1).toUpperCase()
-                + last.substring(1).toLowerCase();
+        final String firstInProperForm = first.substring(FIRST_CHARACTER_INDEX, SECOND_CHARACTER_INDEX).toUpperCase()
+                + first.substring(SECOND_CHARACTER_INDEX).toLowerCase();
+        final String lastInProperForm = last.substring(FIRST_CHARACTER_INDEX, SECOND_CHARACTER_INDEX).toUpperCase()
+                + last.substring(SECOND_CHARACTER_INDEX).toLowerCase();
 
         return firstInProperForm + " " + lastInProperForm;
     }
@@ -81,11 +86,11 @@ public class Name {
         StringBuilder firstReversed = new StringBuilder();
         StringBuilder lastReversed = new StringBuilder();
 
-        for (int i = 0; i < first.length(); i++) {
+        for (int i = FIRST_CHARACTER_INDEX; i < first.length(); i++) {
             firstReversed.append(first.charAt(first.length() - 1 - i));
         }
 
-        for (int i = 0; i < last.length(); i++) {
+        for (int i = FIRST_CHARACTER_INDEX; i < last.length(); i++) {
             lastReversed.append(last.charAt(last.length() - 1 - i));
         }
 

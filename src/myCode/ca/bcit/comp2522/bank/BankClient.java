@@ -21,8 +21,10 @@ public class BankClient
      *
      * @params name, birthDate, deathDate
      */
-    public BankClient(final Name name, final Date birthDate,
-                      final Date deathDate, final String clientID,
+    public BankClient(final Name name,
+                      final Date birthDate,
+                      final Date deathDate,
+                      final String clientID,
                       final Date signupDate)
     {
         Validation.validateBankClient(name, birthDate, deathDate, clientID, signupDate);
