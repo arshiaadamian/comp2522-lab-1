@@ -26,7 +26,7 @@ public class BankAccount
      * @param accountOpened  the date the account was opened
      * @param accountClosed  the date the account was closed (may be null)
      */
-    public BankAccount(final BankClient client,
+    public BankAccount (final BankClient client,
                        final double balanceUsd,
                        final int pin,
                        final String accountNumber,
@@ -49,7 +49,7 @@ public class BankAccount
      *
      * @param amountUsd the amount to withdraw
      */
-    public void withdraw(final double amountUsd)
+    public void withdraw (final double amountUsd)
     {
         balanceUsd -= amountUsd;
     }
@@ -61,7 +61,7 @@ public class BankAccount
      * @param amountUsd   the amount to withdraw
      * @param pinToMatch  the PIN provided for verification
      */
-    public void withdraw(final double amountUsd, final int pinToMatch)
+    public void withdraw (final double amountUsd, final int pinToMatch)
     {
         if (pin == pinToMatch)
         {
@@ -82,15 +82,15 @@ public class BankAccount
      * @return a string containing account and client details
      */
     public String getDetails() {
-        String details = client.name.getFullName() + " had $" + balanceUsd
-                + " USD in account #" + accountNumber + " which was opened on "
-                + accountOpened.getDayOfTheWeek() + " " + accountOpened.getMonthName()
-                + " " + accountOpened.getDay() + ", " + accountOpened.getYear();
+        String details = client.name.getFullName() + " had $" + balanceUsd + " USD in account #" +
+                accountNumber + " which was opened on " + accountOpened.getDayOfTheWeek() + " " +
+                accountOpened.getMonthName() + " " + accountOpened.getDay() + ", " +
+                accountOpened.getYear();
 
         if (accountClosed != null) {
-            details += " and closed on " + accountClosed.getDayOfTheWeek() + " "
-                    + accountClosed.getMonthName() + " " + accountClosed.getDay()
-                    + ", " + accountClosed.getYear();
+            details += " and closed on " + accountClosed.getDayOfTheWeek() + " " +
+                    accountClosed.getMonthName() + " " + accountClosed.getDay() +
+                    ", " + accountClosed.getYear();
         } else {
             details += " and the account is still open.";
         }

@@ -26,6 +26,9 @@ public class Validation {
     private static final int MIN_DAY = 1;
     private static final int FEBRUARY = 2;
     private static final int MAX_DAYS = 29;
+    private static final int JANUARY = 1;
+    private static final int DECEMBER = 12;
+
 
 
     /**
@@ -37,8 +40,10 @@ public class Validation {
      * @param clientID   unique identifier
      * @param signupDate date the client joined
      */
-    public static void validateBankClient(final Name name, final Date birthDate,
-                                          final Date deathDate, final String clientID,
+    public static void validateBankClient (final Name name,
+                                          final Date birthDate,
+                                          final Date deathDate,
+                                          final String clientID,
                                           final Date signupDate) {
         if (name == null || birthDate == null || clientID == null || signupDate == null) {
             throw new IllegalArgumentException("Name, birthDate, clientID or signupDate cannot be null.");
@@ -55,7 +60,8 @@ public class Validation {
      * @param first the first name
      * @param last  the last name
      */
-    public static void validateName(final String first, final String last) {
+    public static void validateName (final String first,
+                                    final String last) {
         if (first == null || last == null) {
             throw new IllegalArgumentException("First or last name cannot be null.");
         }
@@ -78,7 +84,7 @@ public class Validation {
      *
      * @param accountNumber the account number
      */
-    public static void validateBankAccount(final String accountNumber) {
+    public static void validateBankAccount (final String accountNumber) {
         if (accountNumber == null || accountNumber.length() < MIN_ID_LENGTH || accountNumber.length() > MAX_ID_LENGTH) {
             throw new IllegalArgumentException("Account number must be between " + MIN_ID_LENGTH + " and " + MAX_ID_LENGTH + " characters.");
         }
@@ -91,22 +97,36 @@ public class Validation {
      * @param month the month (1–12)
      * @param day   the day of the month
      */
-    public static void validateDate(final int year, final int month, final int day) {
-        if (year < MIN_VALID_YEAR || year > MAX_VALID_YEAR) {
-            throw new IllegalArgumentException("Invalid year. Pick a year between " + MIN_VALID_YEAR + " and " + MAX_VALID_YEAR + ".");
+    public static void validateDate(final int year,
+                                    final int month,
+                                    final int day) {
+
+        // Year bounds
+        if (year < Date.MIN_YEAR || year > Date.MAX_YEAR) {
+            throw new IllegalArgumentException(
+                    "Invalid year. Pick a year between "
+                            + Date.MIN_YEAR + " and " + Date.MAX_YEAR + "."
+            );
         }
 
-        if (month < MIN_MONTH || month > MAX_MONTH) {
-            throw new IllegalArgumentException("Invalid month. Pick a month between " + MIN_MONTH + " and " + MAX_MONTH + ".");
+        // Month bounds
+        if (month < JANUARY || month > DECEMBER) {
+            throw new IllegalArgumentException(
+                    "Invalid month. Pick a month between "
+                            + JANUARY + " and " + DECEMBER + "."
+            );
         }
 
-        int maxDays = Date.DAYS_IN_MONTH[month];
-        if (month == FEBRUARY && Date.isLeapYear(year)) {
-            maxDays = MAX_DAYS;
-        }
+        // Max days based on month and leap-year
+        final int maxDays = Date.daysInMonth(year, month);
 
-        if (day < MIN_DAY || day > maxDays) {
-            throw new IllegalArgumentException("Invalid day. Pick a day between " + MIN_DAY + " and " + maxDays + ".");
+        // Day bounds
+        if (day < MIN_DAY|| day > maxDays) {
+            throw new IllegalArgumentException(
+                    "Invalid day. Pick a day between "
+                            + MIN_DAY + " and " + maxDays + "."
+            );
         }
     }
+
 }

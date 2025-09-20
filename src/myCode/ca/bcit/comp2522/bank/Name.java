@@ -12,6 +12,7 @@ public class Name {
     private static final int FIRST_CHARACTER_INDEX = 0;
     private static final int SECOND_CHARACTER_INDEX = 1;
 
+
     private final String first;
     private final String last;
 
@@ -24,7 +25,7 @@ public class Name {
      * @throws IllegalArgumentException if either name is null,
      *         empty, too long, or contains disallowed words
      */
-    public Name(final String first,
+    public Name (final String first,
                 final String last)
     {
         Validation.validateName(first, last);
@@ -56,7 +57,7 @@ public class Name {
      *
      * @return the user's initials
      */
-    public String getInitials() {
+    public String getInitials () {
         return first.substring(FIRST_CHARACTER_INDEX, SECOND_CHARACTER_INDEX).toUpperCase() + "."
                 + last.substring(FIRST_CHARACTER_INDEX, SECOND_CHARACTER_INDEX).toUpperCase();
     }
@@ -67,11 +68,11 @@ public class Name {
      *
      * @return the properly formatted full name
      */
-    public String getFullName() {
-        final String firstInProperForm = first.substring(FIRST_CHARACTER_INDEX, SECOND_CHARACTER_INDEX).toUpperCase()
-                + first.substring(SECOND_CHARACTER_INDEX).toLowerCase();
-        final String lastInProperForm = last.substring(FIRST_CHARACTER_INDEX, SECOND_CHARACTER_INDEX).toUpperCase()
-                + last.substring(SECOND_CHARACTER_INDEX).toLowerCase();
+    public String getFullName () {
+        final String firstInProperForm = first.substring(FIRST_CHARACTER_INDEX, SECOND_CHARACTER_INDEX).toUpperCase() +
+                first.substring(SECOND_CHARACTER_INDEX).toLowerCase();
+        final String lastInProperForm = last.substring(FIRST_CHARACTER_INDEX, SECOND_CHARACTER_INDEX).toUpperCase() +
+                last.substring(SECOND_CHARACTER_INDEX).toLowerCase();
 
         return firstInProperForm + " " + lastInProperForm;
     }
@@ -82,16 +83,16 @@ public class Name {
      *
      * @return the reversed full name
      */
-    public String getReverseName() {
+    public String getReverseName () {
         StringBuilder firstReversed = new StringBuilder();
         StringBuilder lastReversed = new StringBuilder();
 
         for (int i = FIRST_CHARACTER_INDEX; i < first.length(); i++) {
-            firstReversed.append(first.charAt(first.length() - 1 - i));
+            firstReversed.append(first.charAt(first.length() - SECOND_CHARACTER_INDEX - i));
         }
 
         for (int i = FIRST_CHARACTER_INDEX; i < last.length(); i++) {
-            lastReversed.append(last.charAt(last.length() - 1 - i));
+            lastReversed.append(last.charAt(last.length() - SECOND_CHARACTER_INDEX - i));
         }
 
         return lastReversed + " " + firstReversed;
@@ -102,7 +103,7 @@ public class Name {
      *
      * @param args command-line arguments (not used)
      */
-    public static void main(final String[] args) {
+    public static void main (final String[] args) {
         Name name1 = new Name("arshia", "adamian");
 
         System.out.println(name1.getFullName());

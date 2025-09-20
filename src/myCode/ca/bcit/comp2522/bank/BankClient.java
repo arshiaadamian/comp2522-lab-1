@@ -21,7 +21,7 @@ public class BankClient
      *
      * @params name, birthDate, deathDate
      */
-    public BankClient(final Name name,
+    public BankClient (final Name name,
                       final Date birthDate,
                       final Date deathDate,
                       final String clientID,
